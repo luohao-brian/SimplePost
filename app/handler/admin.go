@@ -3,8 +3,8 @@ package handler
 import (
 	"strconv"
 
-	"github.com/SimplePosts/app/model"
-	"github.com/SimplePosts/app/utils"
+	"github.com/luohao-brian/SimplePosts/app/model"
+	"github.com/luohao-brian/SimplePosts/app/utils"
 	"github.com/dinever/golf"
 )
 

@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/SimplePosts/app"
+	"github.com/luohao-brian/SimplePosts/app"
 )
 
 func main() {

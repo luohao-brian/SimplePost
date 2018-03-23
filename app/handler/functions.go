@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"github.com/SimplePosts/app/model"
+	"github.com/luohao-brian/SimplePosts/app/model"
 )
 
 func getAllTags() []*model.Tag {

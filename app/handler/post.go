@@ -6,8 +6,8 @@ import (
 	"strconv"
 
 	"github.com/dinever/golf"
-	"github.com/SimplePosts/app/model"
-	"github.com/SimplePosts/app/utils"
+	"github.com/luohao-brian/SimplePosts/app/model"
+	"github.com/luohao-brian/SimplePosts/app/utils"
 )
 
 func registerPostHandlers(app *golf.Application, routes map[string]map[string]interface{}) {

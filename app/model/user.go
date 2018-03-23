@@ -3,7 +3,7 @@ package model
 import (
 	"time"
 
-	"github.com/SimplePosts/app/utils"
+	"github.com/luohao-brian/SimplePosts/app/utils"
 	"github.com/russross/meddler"
 	"golang.org/x/crypto/bcrypt"
 )

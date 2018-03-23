@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/SimplePosts/app/handler"
-	"github.com/SimplePosts/app/model"
+	"github.com/luohao-brian/SimplePosts/app/handler"
+	"github.com/luohao-brian/SimplePosts/app/model"
 	"github.com/dinever/golf"
 )
 

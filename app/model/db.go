@@ -9,7 +9,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/SimplePosts/app/utils"
+	"github.com/luohao-brian/SimplePosts/app/utils"
 	_ "github.com/go-sql-driver/mysql"
 )
 
