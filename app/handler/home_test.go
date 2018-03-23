@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SimplePost/app/model"
-	"github.com/SimplePost/app/utils"
+	"github.com/SimplePosts/app/model"
+	"github.com/SimplePosts/app/utils"
 	. "github.com/smartystreets/goconvey/convey"
 )
 

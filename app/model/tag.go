@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/SimplePost/app/utils"
+	"github.com/SimplePosts/app/utils"
 	"github.com/russross/meddler"
 )
 
