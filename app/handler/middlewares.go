@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/dinever/golf"
-	"github.com/SimpleDingo/app/model"
+	"github.com/SimplePost/app/model"
 )
 
 func AuthMiddleware(next golf.HandlerFunc) golf.HandlerFunc {

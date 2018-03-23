@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"fmt"
-	"github.com/SimpleDingo/app/utils"
+	"github.com/SimplePost/app/utils"
 	"github.com/russross/meddler"
 )
 

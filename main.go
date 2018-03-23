@@ -3,7 +3,7 @@ package main
 import (
 	"flag"
 
-	"github.com/SimpleDingo/app"
+	"github.com/SimplePost/app"
 )
 
 func main() {

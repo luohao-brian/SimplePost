@@ -12,7 +12,7 @@ import (
 	"time"
 
 	"github.com/dinever/golf"
-	"github.com/SimpleDingo/app/model"
+	"github.com/SimplePost/app/model"
 	. "github.com/smartystreets/goconvey/convey"
 )
 

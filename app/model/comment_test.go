@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SimpleDingo/app/utils"
+	"github.com/SimplePost/app/utils"
 	. "github.com/smartystreets/goconvey/convey"
 )
 

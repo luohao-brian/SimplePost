@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/dinever/golf"
-	"github.com/SimpleDingo/app/utils"
+	"github.com/SimplePost/app/utils"
 	"github.com/russross/meddler"
 )
 

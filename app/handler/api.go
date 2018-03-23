@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/dinever/golf"
-	"github.com/SimpleDingo/app/utils"
+	"github.com/SimplePost/app/utils"
 )
 
 type APISerializeable interface {

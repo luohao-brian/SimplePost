@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/dinever/golf"
-	"github.com/SimpleDingo/app/model"
+	"github.com/SimplePost/app/model"
 )
 
 type JWTPostBody struct {
