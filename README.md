@@ -9,6 +9,25 @@ SimplePosts是一个基于[Dingo Blog](https://github.com/dingoblog/dingo)内核
 $ go get github.com/luohao-brian/SimplePosts
 ```
 
+### 数据库
+SimplePosts使用mysql，配置文件db.json,  默认配置如下：
+
+```
+{
+    "db_host":"127.0.0.1",
+    "db_port":3306,
+    "db_user":"root",
+    "db_pass":"root",
+    "db_name":"dingo"
+}
+```
+使用之前，参考如下命令创建数据库：
+```
+mysql -uroot -proot -e "create database dingo;"
+```
+
+
+
 ### 使用
 ```
 $ cd $GOPATH/src/github.com/luohao-brian/SimplePosts
