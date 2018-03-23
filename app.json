@@ -1,7 +1,7 @@
 {
   "name": "Dingo",
   "description": "Blog engine written in Go",
-  "repository": "https://github.com/SimpleDingoblog/dingo",
+  "repository": "https://github.com/luohao-brian/SimplePosts",
   "keywords": ["blog"],
   "success_url": "/signup",
 }
