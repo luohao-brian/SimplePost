@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	"github.com/dinever/golf"
-	"github.com/SimplePost/app/model"
+	"github.com/SimplePosts/app/model"
 )
 
 func registerUserHandlers(app *golf.Application, routes map[string]map[string]interface{}) {

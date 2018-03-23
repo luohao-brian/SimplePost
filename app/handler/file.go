@@ -10,8 +10,8 @@ import (
 
 	"github.com/aliyun/aliyun-oss-go-sdk/oss"
 	"github.com/dinever/golf"
-	"github.com/SimplePost/app/model"
-	"github.com/SimplePost/app/utils"
+	"github.com/SimplePosts/app/model"
+	"github.com/SimplePosts/app/utils"
 )
 
 func OssSetting() *oss.Bucket {

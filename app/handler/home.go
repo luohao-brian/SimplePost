@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/dinever/golf"
-	"github.com/SimplePost/app/model"
-	"github.com/SimplePost/app/utils"
+	"github.com/SimplePosts/app/model"
+	"github.com/SimplePosts/app/utils"
 )
 
 func RegisterFunctions(app *golf.Application) {
