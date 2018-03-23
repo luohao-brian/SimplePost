@@ -36,8 +36,8 @@ func initConnection() error {
 }
 
 func createTableIfNotExist() error {
-	for i := 0; i < len(SqlDatas); i++ {
-		if _, err := db.Exec(SqlDatas[i]); err != nil {
+	for i := 0; i < len(TableSchemas); i++ {
+		if _, err := db.Exec(TableSchemas[i]); err != nil {
 			return err
 		}
 	}
