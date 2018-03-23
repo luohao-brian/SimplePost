@@ -28,10 +28,6 @@ var (
 )
 
 func AppPath(filename string) string {
-	//	AppPath, err := filepath.Abs(filepath.Dir(os.Args[0]))
-	//	if err != nil {
-	//		panic(err)
-	//	}
 	//获取工作目录
 	workPath, err := os.Getwd()
 	if err != nil {
@@ -40,6 +36,7 @@ func AppPath(filename string) string {
 	confPath := filepath.Join(workPath, filename)
 	return confPath
 }
+
 func ConfigSetting() *DbConfig {
 	config := DbConfig{}
 	path := AppPath(DbName)
