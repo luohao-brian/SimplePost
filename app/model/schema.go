@@ -149,5 +149,5 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 `
 
-var SqlDatas = [...]string{posts, tokens, users, categories, tags,
+var TableSchemas= [...]string{posts, tokens, users, categories, tags,
 	comments, posts_tags, posts_categories, settings, roles, messages}
