@@ -4,9 +4,9 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/dinever/golf"
 	"github.com/luohao-brian/SimplePosts/app/model"
 	"github.com/luohao-brian/SimplePosts/app/utils"
-	"github.com/dinever/golf"
 )
 
 func Initialize(app *golf.Application) *golf.Application {
@@ -19,10 +19,10 @@ func Initialize(app *golf.Application) *golf.Application {
 	RegisterFunctions(app)
 	theme := model.GetSettingValue("theme")
 	app.View.SetTemplateLoader("base", "view")
-	app.View.SetTemplateLoader("admin", filepath.Join("view", "adminlte"))
+	app.View.SetTemplateLoader("admin", filepath.Join("view", "admin"))
 	app.View.SetTemplateLoader("theme", filepath.Join("view", theme))
 	app.Static("/upload/", upload_dir)
-	app.Static("/admin/", filepath.Join("view", "adminlte", "assets", "dist"))
+	app.Static("/admin/", filepath.Join("view", "admin", "assets", "dist"))
 	app.Static("/", filepath.Join("view", theme, "assets", "dist"))
 	app.SessionManager = golf.NewMemorySessionManager()
 	app.Error(404, NotFoundHandler)

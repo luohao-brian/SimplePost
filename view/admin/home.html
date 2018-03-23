@@ -6,11 +6,10 @@
 <section class="content-header">
 	<h1>
 		仪表盘
-		<small>Control panel</small>
 	</h1>
 	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li class="active">Dashboard</li>
+		<li><a href="#"><i class="fa fa-dashboard"></i>主页</a></li>
+		<li class="active">仪表盘</li>
 	</ol>
 </section>
 
@@ -22,14 +21,14 @@
 			<!-- small box -->
 			<div class="small-box bg-aqua">
 				<div class="inner">
-					<h3>Posts</h3>
+					<h3>文章</h3>
 
 					<p>{{.Statis.Posts}}</p>
 				</div>
 				<div class="icon">
 					<i class="ion ion-bag"></i>
 				</div>
-				<a href="/admin/posts/" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+				<a href="/admin/posts/" class="small-box-footer">查看更多 <i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<!-- ./col -->
@@ -37,28 +36,28 @@
 			<!-- small box -->
 			<div class="small-box bg-green">
 				<div class="inner">
-					<h3>Comments</h3>
+					<h3>留言</h3>
 
 					<p>{{.Statis.Comments}}</p>
 				</div>
 				<div class="icon">
 					<i class="ion ion-stats-bars"></i>
 				</div>
-				<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+				<a href="#" class="small-box-footer">查看更多 <i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<div class="col-lg-3 col-xs-6">
 			<!-- small box -->
 			<div class="small-box bg-red">
 				<div class="inner">
-					<h3>Files</h3>
+					<h3>文件</h3>
 
 					<p>{{.Statis.Files}}</p>
 				</div>
 				<div class="icon">
 					<i class="ion ion-pie-graph"></i>
 				</div>
-				<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+				<a href="#" class="small-box-footer">查看更多 <i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<!-- ./col -->
@@ -66,14 +65,14 @@
 			<!-- small box -->
 			<div class="small-box bg-yellow">
 				<div class="inner">
-					<h3>Sessions</h3>
+					<h3>用户</h3>
 
 					<p>{{.Statis.Sessions}}</p>
 				</div>
 				<div class="icon">
 					<i class="ion ion-person-add"></i>
 				</div>
-				<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+				<a href="#" class="small-box-footer">查看更多 <i class="fa fa-arrow-circle-right"></i></a>
 			</div>
 		</div>
 		<!-- ./col -->
@@ -81,14 +80,14 @@
 	<div class="box box-success">
 		<div class="box-header ui-sortable-handle">
 			<i class="fa fa-comments-o"></i>
-			<h3 class="box-title">Messages</h3>
+			<h3 class="box-title">消息列表</h3>
 		</div>
 		<div class="box-tools pull-right"></div>
 		<div class="slimScrollDiv" >
 			<div class="box-body chat" id="chat-box">
 				{{range .Messages}}
 				<div class="item">
-					<p class="message">
+					<p class="message" style="margin-top:3%;">
 						<a href="#" class="name">
 							<small class="text-muted pull-right">
 								<i class="fa fa-clock-o">						
@@ -102,7 +101,7 @@
 				{{end}}
 
 				{{if lt (len .Messages) 1}}
-				<div class="item" style="margin-top:3%;">
+				<div class="item" style="margin-top:3%;margin-left:1%;">
 					<p class="message">
 						<a class="name">
 							<small class="text-muted pull-right">					
