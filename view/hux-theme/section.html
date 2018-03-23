@@ -1,0 +1,25 @@
+{{ extends "/default.html" }}
+{{define "content"}}
+<div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12 sidebar-container">
+    <section>
+      <hr class="hidden-sm hidden-xs">
+      
+      <h5><a href="">TAGS LISTS</a></h5>
+      <div class="tags">
+            {{ range .Posts }}
+            {{ range .Tags }}
+              <a href="{{ .Url }}" title="Tech">{{ .Name }}</a>
+            {{ end }}
+            {{end}}
+  </div>
+</section>
+<section>
+    <hr class="visible-md visible-lg">
+    <a href=""><h5>ABOUT ME</h5></a> 
+    <div class="short-about">
+     <img src="/images/avatar-hux.jpg" alt="">
+     <p>高调做事,低调做人</p>
+ </div>
+</section>
+</div>
+{{end}}

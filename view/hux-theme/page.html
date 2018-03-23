@@ -1,0 +1,26 @@
+{{ extends "/default.html" }}
+{{define "content"}}
+<header class="intro-header" style="background-image: url(/images/home-bg.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1>云谷计算</h1>
+                    <span class="subheading">高调做事,低调做人...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<article>
+    <div class="container">
+        <div class="row">
+             <div class="post-container col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <h1 class="post-title">{{ .Post.Title }}</h1>
+                {{Html .Post.Html }}
+                <hr style="visibility: hidden;">
+            </div>
+        </div>
+    </div>
+</article>
+{{end}}

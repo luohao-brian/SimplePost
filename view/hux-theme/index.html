@@ -1,0 +1,59 @@
+{{ extends "/default.html" }}
+{{ define "content" }}
+<header class="intro-header" style="background-image: url(/images/home-bg.jpg);">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<div class="site-heading">
+					<h1>云谷计算</h1>
+					<span class="subheading">高调做事,低调做人...</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 postlist-container">
+			{{ range .Posts }}
+			<div class="post-preview">
+				<a href="{{ .Url }}/">
+					<h2 class="post-title">{{ .Title }}</h2>
+					<div class="post-content-preview">{{.Excerpt}} ...</div>
+				</a>
+				<p class="post-meta">Posted By <a href="#" title="{{ .Author.Name }}">{{ .Author.Name }}</a> , On <time datetime='{{DateFormat .PublishedAt "%Y-%m-%d"}}'>{{ DateFormat .PublishedAt "%b %d, %Y"}}</time></p>
+			</div>
+			{{end}}
+			<ul class="pager">
+				<li class="previous">
+					{{if .Pager.IsNext}}<a href="/page/{{.Pager.Next}}/" class="item left">Older Posts</a>{{end}}
+				</li>
+				<li class="next">
+					{{if .Pager.IsPrev}}<a href="/page/{{.Pager.Prev}}/" class="item right">Newer Posts</a>{{end}}
+				</li>
+			</ul>
+		</div>
+		<!--<div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12 sidebar-container">
+			<section>
+				<hr class="hidden-sm hidden-xs">
+				<h5><a href="/tags/">FEATURED TAGS</a></h5>
+				<div class="tags">
+				{{ range .Posts }}
+					{{ range .Tags }}
+					<a href="{{ .Url }}/" title="{{.Name}}" rel="2">{{ .Name }}</a>
+					{{end}}
+				{{end}}
+				</div>
+			</section>
+			<section class="visible-md visible-lg">
+				<hr>
+				<h5><a href="/about/">ABOUT ME</a></h5>
+				<div class="short-about">
+					<img src="/images/avatar-hux.jpg">
+					<p>高调做人,低调做事...</p>
+				</div>
+			</section>
+		</div>-->
+	</div>
+</div>
+{{ end }}

@@ -1,0 +1,112 @@
+{{ extends "/default.html" }}
+
+{{ define "body"}}
+
+<section class="box">
+	<div class="box-header">
+		<h3 class="box-title">修改文章
+			<small>Edit post</small>
+		</h3>
+	</div> 
+	<div class="box-body">
+		<form id="post-form" action="#" method="post">
+			<div class="form-group">
+				<label>Title</label>
+				<input type="text" class="form-control" name="title" value="{{ .Post.Title }}">
+			</div>
+			<div class="form-group">
+				<label>Post Slug</label>
+				<input type="text" class="form-control" name="slug" value="{{ .Post.Slug }}">
+			</div>
+			<div class="form-group">
+				<label>Cover Image</label>
+				<input type="text" class="form-control" name="image" value="{{ .Post.Image }}">
+			</div>
+			<div id="editormd" >
+				<textarea name="content" id="content" class="ipt">{{Html .Post.Markdown}}</textarea>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-4">
+					<label>Category</label>
+					<input type="text" class="form-control" name="category" value="{{ .Post.Title }}">
+				</div>
+				<div class="col-xs-4">
+					<label for="slug">Tags (Separate by commas)</label>
+					<input type="text" class="form-control" name="tag" id="tag" value="{{ .Post.TagString }}">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="comment" {{ if .Post.AllowComment }}checked{{ end }}>
+						Allow Comment
+					</input>
+				</label>
+			</div>
+			<div class="checkbox">
+				<label>
+					<input type="checkbox" name="status" {{ if .Post.IsPublished }}checked{{ end }} >
+					Publish
+				</input>
+			</label>
+		</div>
+	</div>
+	<div class="form-group">
+		<button type="submit" id="save_post" class="btn btn-block btn-primary btn-lg">Save</button>
+	</div>
+</form>
+
+</div>
+</section>
+
+{{end}}
+
+{{ define "after_footer" }}
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+	var simplemde = new SimpleMDE({
+		element: $("#content")[0],
+		renderingConfig: {
+			codeSyntaxHighlighting: true
+		}
+	});
+	$("#save_post").on("click",function(){
+	// 	e.preventDefault();
+	// 	$("#post-form").ajaxSubmit({
+	// 		success: function (json) {
+	// 			if (json.status === "success") {
+	// 				alert("Content saved", 'success');
+	// 				window.location.href="/admin/posts/";
+
+	// 			} else {
+	// 				alert(json.msg);
+	// 			}
+	// 		},
+	// 		error: function (json) {
+	// 			alert(("Error: " + JSON.parse(json.responseText).msg));
+	// 		}
+	// 	});
+	 var options = {   
+            type: 'POST',  
+            url: '/admin/editor/post/',
+            success: function (json) {
+				if (json.status === "success") {
+					alert("Content saved", 'success');
+					window.location.href="/admin/posts/";
+
+				} else {
+					alert(json.msg);
+				}
+			},
+			dataType: 'json', 
+			error: function (json) {
+				alert(("Error: " + JSON.parse(json.responseText).msg));
+			}    
+        };   
+        $("#post-form").submit(function(){   
+            $(this).ajaxSubmit(options);   
+            return false;   //防止表单自动提交  
+        }); 
+	});
+</script>
+{{ end }}

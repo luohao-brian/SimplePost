@@ -1,0 +1,55 @@
+{{ extends "/default.html" }}
+{{ define "content" }}
+<header class="intro-header" style="background-image: url(/images/home-bg.jpg);">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+				<div class="site-heading">
+					<h1>云谷计算</h1>
+					<span class="subheading">高调做事,低调做人...</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <!-- 标签云 -->
+			<div id='tag_cloud' class="tags">
+			{{range .Tags}}
+				<a href="#{{ .Name }}" title="{{ .Name }}" >{{.Name}}</a>
+			{{end}}
+			</div>
+            <!-- 标签列表 -->
+			{{range .Posts}}
+			<div class="one-tag-list">
+				{{range .Tags}}
+			  	<span class="fa fa-tag listing-seperator" id="{{.Name}}">
+                   	<span class="tag-text">{{ .Name }}</span>
+                </span>
+				{{end}}
+				 <div class="post-preview">
+				    <a href="{{ .Url }}">
+				        <h2 class="post-title">
+                        {{ .Title }}
+				        </h2>
+				    </a>
+				 </div>
+				<hr>
+			</div>
+			{{end}}
+		</div>
+	</div>
+</div>
+<script>
+window.onload=function(){
+	var tags=tag_cloud.querySelectorAll("a")
+
+	for (var i=0;i<tags.length;i++){
+     	var col = 'rgb' + '(' + Math.ceil(Math.random() * 230) + ',' + Math.ceil(Math.random() * 230) + ',' + Math.ceil(Math.random() * 230) + ')';
+		tags[i].style.background=col;
+	}
+}
+</script>
+{{ end }}

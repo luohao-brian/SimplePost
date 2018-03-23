@@ -1,0 +1,89 @@
+{{extends "default.html"}}
+
+{{define "body"}}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="box">
+      <div class="box-header">
+        <h3 class="box-title">文章列表</h3>
+        <a href="/admin/editor/post" class="btn btn-default btn-xs">
+          <i class="fa fa-fw fa-edit"></i>
+          添加文章
+        </a>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body table-responsive no-padding">
+        <table class="table table-hover">
+          <tbody>
+            <tr>
+              <th>文章标题</th>
+              <th>文章摘要</th>
+              <th>发布时间</th>
+              <th>文章标签</th>
+              <th>操作</th>
+            </tr>
+            {{range .Posts}}
+            <tr>
+             <td>{{ .Title }}</td>
+             <td>{{ .Excerpt }}</td>
+             <td>{{DateFormat .CreatedAt "%Y-%m-%d"}}</td>
+             <td>
+              {{range .Tags}}
+              <span class="label label-danger" style="display: inline-block;margin-top:1px;">{{.Name}}</span>
+              {{end}}
+            </td>
+            <td> {{ if .IsPublished }}
+              <a href="{{ .Url }}" class="btn btn-default btn-xs">
+               <i class="fa fa-fw fa-file-o"></i>详情
+             </a>
+             {{ else }}
+             <button href="{{ .Url }}" class="btn btn-default btn-xs" disabled>
+              <i class="fa fa-fw fa-file-o">详情</i>
+            </button>
+            {{ end }}
+            <button class="btn btn-default btn-xs">
+             <a href="/admin/editor/{{ .Id }}/" style="color:#444;">
+              <i class="fa fa-fw fa-edit"></i>修改
+            </a>
+          </button>
+          <button class="btn btn-default btn-xs">
+           <a rel="{{ .Id }}" style="color:#444;" class="delete-post">
+            <i class="fa fa-fw fa-close"></i>删除
+          </a>
+        </button></td>
+      </tr>
+      {{end}}
+    </tbody>
+  </table>
+</div>
+<!-- /.box-body -->
+</div>
+<!-- /.box -->
+</div>
+</div>
+{{end}}
+{{ define "after_footer" }}
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script>
+  $(".delete-post").on("click",function(e){
+    e.preventDefault();
+    var id = $(this).attr("rel");
+    var result= confirm("Are you sure you want to delete this post?")
+    if (result == true){
+      $.ajax({
+        "url":"/admin/editor/"+id+"/",
+        "type":"delete",
+        "success":function(json){
+          if(json.status === "success"){
+            alert("Post deleted");
+            $('#dingo-post-' + id).remove();
+            window.location.href="/admin/posts/";
+          }
+        }
+      });
+    }else{
+      window.location.href="/admin/posts/";
+    }
+  });
+</script>
+{{ end }}

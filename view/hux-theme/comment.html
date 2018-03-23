@@ -1,0 +1,22 @@
+<li id="comment-{{ .Id }}" class="comment">
+    <article id="div-comment-{{ .Id }}" class="comment-body">
+        <footer class="comment-meta">
+            <div class="comment-author vcard">
+                <img src="{{ .Avatar }}" width="60" height="60" alt="{{ .Avatar }}" class="comment-avatar">
+                <a {{ if .Website }}href="{{ .Website }}"{{ end }} rel="external nofollow" class="comment-name">{{ .Author }}</a>
+                {{if .Parent}}
+                <a href="#comment-{{ .ParentComment.Id }}" class="comment-date"><i class="fa fa-reply" aria-hidden="true"></i> in response to {{ .ParentComment.Author }}</a>
+                {{end}}
+            </div>
+            <div class="comment-metadata">
+                <a href="#" class="comment-date">
+                    <time class="timeago" datetime='{{ DateFormat .CreatedAt "%Y-%m-%dT%H:%M:%S%z" }}'>{{ DateFormat .CreatedAt "%B %d, %Y at %H:%M" }}</time>
+                </a>
+            </div>
+        </footer>
+
+        <div class="comment-content">{{Html .Content }}</div>
+
+        <button rel="{{ .Id }}" class="button comment-reply" aria-label="">Reply</button>
+    </article>
+</li>
