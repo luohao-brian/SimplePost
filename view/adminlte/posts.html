@@ -32,7 +32,8 @@
               <span class="label label-danger" style="display: inline-block;margin-top:1px;">{{.Name}}</span>
               {{end}}
             </td>
-            <td> {{ if .IsPublished }}
+            <td> 
+              {{ if .IsPublished }}
               <a href="{{ .Url }}" class="btn btn-default btn-xs">
                <i class="fa fa-fw fa-file-o"></i>详情
              </a>

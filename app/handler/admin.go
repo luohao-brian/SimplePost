@@ -58,7 +58,7 @@ func PostCreateHandler(ctx *golf.Context) {
 	u := userObj.(*model.User)
 	p := model.NewPost()
 	ctx.Loader("admin").Render("edit_post.html", map[string]interface{}{
-		"Title": "新建文章",
+		"Title": "编辑文章",
 		"Post":  p,
 		"User":  u,
 	})
@@ -76,6 +76,8 @@ func PostSaveHandler(ctx *golf.Context) {
 	p.UpdatedBy = u.Id
 	p.IsPage = false
 	p.Hits = 1
+	p.AllowComment = true
+	p.IsPublished = true
 	tags := model.GenerateTagsFromCommaString(ctx.Request.FormValue("tag"))
 	var e error
 	e = p.Save(tags...)
@@ -106,6 +108,8 @@ func ContentSaveHandler(ctx *golf.Context) {
 	p.Html = utils.Markdown2Html(p.Markdown)
 	p.UpdatedBy = u.Id
 	p.Hits = 1
+	p.AllowComment = true
+	p.IsPublished = true
 	tags := model.GenerateTagsFromCommaString(ctx.Request.FormValue("tag"))
 	var e error
 	e = p.Save(tags...)
@@ -158,7 +162,7 @@ func ContentEditHandler(ctx *golf.Context) {
 		return
 	}
 	ctx.Loader("admin").Render("edit_post.html", map[string]interface{}{
-		"Title": "修改文章",
+		"Title": "编辑文章",
 		"Post":  p,
 		"User":  u,
 	})
@@ -184,7 +188,7 @@ func PageCreateHandler(ctx *golf.Context) {
 	u := userObj.(*model.User)
 	p := model.NewPost()
 	ctx.Loader("admin").Render("edit_post.html", map[string]interface{}{
-		"Title": "新建单页",
+		"Title": "编辑文章",
 		"Post":  p,
 		"User":  u,
 	})
@@ -230,6 +234,8 @@ func PageSaveHandler(ctx *golf.Context) {
 	p.UpdatedBy = u.Id
 	p.IsPage = true
 	p.Hits = 1
+	p.AllowComment = true
+	p.IsPublished = true
 	tags := model.GenerateTagsFromCommaString(ctx.Request.FormValue("tag"))
 	var e error
 	e = p.Save(tags...)

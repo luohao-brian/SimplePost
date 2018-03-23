@@ -4,22 +4,21 @@
 
 <section class="box">
 	<div class="box-header">
-		<h3 class="box-title">修改文章
-			<small>Edit post</small>
+		<h3 class="box-title">编辑文章
 		</h3>
 	</div> 
 	<div class="box-body">
 		<form id="post-form" action="#" method="post">
 			<div class="form-group">
-				<label>Title</label>
+				<label>标题</label>
 				<input type="text" class="form-control" name="title" value="{{ .Post.Title }}">
 			</div>
 			<div class="form-group">
-				<label>Post Slug</label>
+				<label>文章别名</label>
 				<input type="text" class="form-control" name="slug" value="{{ .Post.Slug }}">
 			</div>
 			<div class="form-group">
-				<label>Cover Image</label>
+				<label>背景图片</label>
 				<input type="text" class="form-control" name="image" value="{{ .Post.Image }}">
 			</div>
 			<div id="editormd" >
@@ -27,36 +26,19 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-4">
-					<label>Category</label>
+					<label>分类</label>
 					<input type="text" class="form-control" name="category" value="{{ .Post.Title }}">
 				</div>
-				<div class="col-xs-4">
-					<label for="slug">Tags (Separate by commas)</label>
+				<div class="col-xs-4" style="margin-left:10%;">
+					<label for="slug">标签 (","隔开)</label>
 					<input type="text" class="form-control" name="tag" id="tag" value="{{ .Post.TagString }}">
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" name="comment" {{ if .Post.AllowComment }}checked{{ end }}>
-						Allow Comment
-					</input>
-				</label>
+			<div class="form-group" style="margin-top:7em;">
+				<button type="submit" id="save_post" class="btn btn-block btn-primary btn-lg">保存</button>
 			</div>
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" name="status" {{ if .Post.IsPublished }}checked{{ end }} >
-					Publish
-				</input>
-			</label>
-		</div>
+		</form>
 	</div>
-	<div class="form-group">
-		<button type="submit" id="save_post" class="btn btn-block btn-primary btn-lg">Save</button>
-	</div>
-</form>
-
-</div>
 </section>
 
 {{end}}
@@ -86,27 +68,25 @@
 	// 			alert(("Error: " + JSON.parse(json.responseText).msg));
 	// 		}
 	// 	});
-	 var options = {   
-            type: 'POST',  
-            url: '/admin/editor/post/',
-            success: function (json) {
-				if (json.status === "success") {
-					alert("Content saved", 'success');
-					window.location.href="/admin/posts/";
+	var options = {   
+		success: function (json) {
+			if (json.status === "success") {
+				alert("Content saved", 'success');
+				window.location.href="/admin/posts/";
 
-				} else {
-					alert(json.msg);
-				}
-			},
-			dataType: 'json', 
-			error: function (json) {
-				alert(("Error: " + JSON.parse(json.responseText).msg));
-			}    
-        };   
-        $("#post-form").submit(function(){   
-            $(this).ajaxSubmit(options);   
+			} else {
+				alert(json.msg);
+			}
+		},
+		dataType: 'json', 
+		error: function (json) {
+			alert(("Error: " + JSON.parse(json.responseText).msg));
+		}    
+	};   
+	$("#post-form").submit(function(){   
+		$(this).ajaxSubmit(options);   
             return false;   //防止表单自动提交  
         }); 
-	});
+});
 </script>
 {{ end }}
