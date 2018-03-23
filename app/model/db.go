@@ -178,7 +178,7 @@ func createWelcomeData() error {
 	c := NewComment()
 	c.Author = "Shawn Ding"
 	c.Email = "dingpeixuan911@gmail.com"
-	c.Website = "http://github.com/SimpleDingoblog/dingo"
+	c.Website = "http://github.com/luohao-brian/SimplePosts"
 	c.Content = "Welcome to Dingo! This is your first comment."
 	c.Avatar = utils.Gravatar(c.Email, "50")
 	c.PostId = p.Id
