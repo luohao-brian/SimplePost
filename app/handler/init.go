@@ -75,7 +75,6 @@ func registerHomeHandler(app *golf.Application) {
 	statsChain := golf.NewChain()
 	app.Get("/", statsChain.Final(HomeHandler))
 	app.Get("/page/:page/", HomeHandler)
-	//	app.Post("/comment/:id/", CommentHandler)
 	//TAGS
 	app.Get("/tags/", TagsHandler)
 	app.Get("/tag/:tag/", TagHandler)
