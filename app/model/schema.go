@@ -56,21 +56,6 @@ CREATE TABLE IF NOT EXISTS users (
 );
 `
 
-const categories = `
-CREATE TABLE IF NOT EXISTS categories (
-  id                INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  name              varchar(150) NOT NULL,
-  slug              varchar(150) NOT NULL,
-  description       varchar(200),
-  parent_id         INT,
-  meta_title        varchar(150),
-  meta_description  varchar(200),
-  created_at        datetime NOT NULL,
-  created_by        INT NOT NULL,
-  updated_at        datetime,
-  updated_by        INT
-);
-`
 const tags = `
 CREATE TABLE IF NOT EXISTS tags (
   id                INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -83,24 +68,7 @@ CREATE TABLE IF NOT EXISTS tags (
   updated_by        INT
 );
 `
-const comments = `
-CREATE TABLE IF NOT EXISTS comments (
-  id            INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  post_id       varchar(150) NOT NULL,
-  author        varchar(150) NOT NULL,
-  author_email  varchar(150) NOT NULL,
-  author_avatar varchar(50)  NOT NULL,
-  author_url    varchar(200) NOT NULL,
-  author_ip     varchar(100) NOT NULL,
-  created_at    datetime     NOT NULL,
-  content       text         NOT NULL,
-  approved      tinyint      NOT NULL DEFAULT '0',
-  agent         varchar(255) NOT NULL,
-  type          varchar(20),
-  parent        INT,
-  user_id       INT
-);
-`
+
 const posts_tags = `
 CREATE TABLE IF NOT EXISTS posts_tags (
   id       INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -149,5 +117,4 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 `
 
-var TableSchemas= [...]string{posts, tokens, users, categories, tags,
-	comments, posts_tags, posts_categories, settings, roles, messages}
+var TableSchemas = [...]string{posts, tokens, users, tags, posts_tags, posts_categories, settings, roles, messages}

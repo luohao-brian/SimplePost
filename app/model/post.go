@@ -130,14 +130,6 @@ func (p *Post) Author() *User {
 }
 
 // Comments returns all the comments associated with the post.
-func (p *Post) Comments() []*Comment {
-	comments := new(Comments)
-	err := comments.GetCommentsByPostId(p.Id)
-	if err != nil {
-		return nil
-	}
-	return comments.GetAll()
-}
 
 // Summary returns the post summary.
 func (p *Post) Summary() string {

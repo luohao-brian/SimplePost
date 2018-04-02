@@ -37,7 +37,6 @@ func registerFuncMap(app *golf.Application) {
 	app.View.FuncMap["DateFormat"] = utils.DateFormat
 	app.View.FuncMap["Now"] = utils.Now
 	app.View.FuncMap["Html2Str"] = utils.Html2Str
-	app.View.FuncMap["FileSize"] = utils.FileSize
 	app.View.FuncMap["Setting"] = model.GetSettingValue
 	app.View.FuncMap["Navigator"] = model.GetNavigators
 	app.View.FuncMap["Md2html"] = utils.Markdown2HtmlTemplate
@@ -94,6 +93,5 @@ func registerAPIHandler(app *golf.Application) {
 	registerPostHandlers(app, routes)
 	registerTagHandlers(app, routes)
 	registerUserHandlers(app, routes)
-	registerCommentsHandlers(app, routes)
 	app.Get("/api", APIDocumentationHandler(routes))
 }

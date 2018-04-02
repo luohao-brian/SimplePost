@@ -165,19 +165,5 @@ func createWelcomeData() error {
 		return err
 	}
 
-	c := NewComment()
-	c.Author = "SimplePosts"
-	c.Email = "dingpeixuan911@gmail.com"
-	c.Website = "http://github.com/luohao-brian/SimplePosts"
-	c.Content = "Welcome to SimplePosts! This is your first comment."
-	c.Avatar = utils.Gravatar(c.Email, "50")
-	c.PostId = p.Id
-	c.Parent = int64(0)
-	c.Ip = "127.0.0.1"
-	c.UserAgent = "Mozilla"
-	c.UserId = 0
-	c.Approved = true
-	c.Save()
-
 	return nil
 }

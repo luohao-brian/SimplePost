@@ -15,9 +15,3 @@ func getRecentPosts() []*model.Post {
 	_, _ = posts.GetPostList(1, 5, false, true, "published_at DESC")
 	return *posts
 }
-
-func getRecentComments() []*model.Comment {
-	comments := new(model.Comments)
-	comments.GetCommentList(1, 5, true)
-	return *comments
-}
