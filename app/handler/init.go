@@ -77,11 +77,11 @@ func registerHomeHandler(app *golf.Application) {
 	app.Get("/page/:page/", HomeHandler)
 	//	app.Post("/comment/:id/", CommentHandler)
 	//TAGS
-	//	app.Get("/tags/", TagsHandler)
-	//	app.Get("/tag/:tag/", TagHandler)
-	//	app.Get("/tag/:tag/page/:page/", TagHandler)
-	//	app.Get("/feed/", RssHandler)
-	//	app.Get("/sitemap.xml", SiteMapHandler)
+	app.Get("/tags/", TagsHandler)
+	app.Get("/tag/:tag/", TagHandler)
+	app.Get("/tag/:tag/page/:page/", TagHandler)
+	app.Get("/feed/", RssHandler)
+	app.Get("/sitemap.xml", SiteMapHandler)
 	app.Get("/:slug/", statsChain.Final(ContentHandler))
 }
 
