@@ -6,16 +6,7 @@ GO ?= go
 TESTS := .
 
 .PHONY: all
-all: build check cover test
-
-.PHONY: cover
-cover:
-	$(GO) list ./... | xargs -n1 go test --cover
-
-.PHONY: test
-test:
-	$(GO) test -v $(GOFLAGS) -i $(PACKAGES)
-	$(GO) test -v $(GOFLAGS) -run $(TESTS) -timeout $(TESTTIMEOUT) $(PACKAGES) $(TESTFLAGS)
+all: build check 
 
 .PHONY: check
 check:
