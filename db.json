@@ -3,5 +3,5 @@
 	"db_port":3306,
 	"db_user":"root",
 	"db_pass":"root",
-	"db_name":"dingo"
+	"db_name":"SimplePosts"
 }

@@ -4,9 +4,9 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/dinever/golf"
 	"github.com/luohao-brian/SimplePosts/app/model"
 	"github.com/luohao-brian/SimplePosts/app/utils"
-	"github.com/dinever/golf"
 )
 
 func Initialize(app *golf.Application) *golf.Application {
@@ -19,10 +19,10 @@ func Initialize(app *golf.Application) *golf.Application {
 	RegisterFunctions(app)
 	theme := model.GetSettingValue("theme")
 	app.View.SetTemplateLoader("base", "view")
-	app.View.SetTemplateLoader("admin", filepath.Join("view", "adminlte"))
+	app.View.SetTemplateLoader("admin", filepath.Join("view", "admin"))
 	app.View.SetTemplateLoader("theme", filepath.Join("view", theme))
 	app.Static("/upload/", upload_dir)
-	app.Static("/admin/", filepath.Join("view", "adminlte", "assets", "dist"))
+	app.Static("/admin/", filepath.Join("view", "admin", "assets", "dist"))
 	app.Static("/", filepath.Join("view", theme, "assets", "dist"))
 	app.SessionManager = golf.NewMemorySessionManager()
 	app.Error(404, NotFoundHandler)
@@ -37,7 +37,6 @@ func registerFuncMap(app *golf.Application) {
 	app.View.FuncMap["DateFormat"] = utils.DateFormat
 	app.View.FuncMap["Now"] = utils.Now
 	app.View.FuncMap["Html2Str"] = utils.Html2Str
-	app.View.FuncMap["FileSize"] = utils.FileSize
 	app.View.FuncMap["Setting"] = model.GetSettingValue
 	app.View.FuncMap["Navigator"] = model.GetNavigators
 	app.View.FuncMap["Md2html"] = utils.Markdown2HtmlTemplate
@@ -75,13 +74,12 @@ func registerHomeHandler(app *golf.Application) {
 	statsChain := golf.NewChain()
 	app.Get("/", statsChain.Final(HomeHandler))
 	app.Get("/page/:page/", HomeHandler)
-	//	app.Post("/comment/:id/", CommentHandler)
 	//TAGS
-	//	app.Get("/tags/", TagsHandler)
-	//	app.Get("/tag/:tag/", TagHandler)
-	//	app.Get("/tag/:tag/page/:page/", TagHandler)
-	//	app.Get("/feed/", RssHandler)
-	//	app.Get("/sitemap.xml", SiteMapHandler)
+	app.Get("/tags/", TagsHandler)
+	app.Get("/tag/:tag/", TagHandler)
+	app.Get("/tag/:tag/page/:page/", TagHandler)
+	app.Get("/feed/", RssHandler)
+	app.Get("/sitemap.xml", SiteMapHandler)
 	app.Get("/:slug/", statsChain.Final(ContentHandler))
 }
 
@@ -95,6 +93,5 @@ func registerAPIHandler(app *golf.Application) {
 	registerPostHandlers(app, routes)
 	registerTagHandlers(app, routes)
 	registerUserHandlers(app, routes)
-	registerCommentsHandlers(app, routes)
 	app.Get("/api", APIDocumentationHandler(routes))
 }

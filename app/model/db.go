@@ -9,8 +9,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/luohao-brian/SimplePosts/app/utils"
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/luohao-brian/SimplePosts/app/utils"
 )
 
 type DbConfig struct {
@@ -88,47 +88,40 @@ func CreateFile(filename string) {
 }
 
 const samplePostContent = `
-Welcome to Dingo! This is your first post. You can find it in the [admin panel](/admin/).
+欢迎使用SimplePosts!这是你的第一个帖子。您可以在管理面板（/admin/posts/）中找到它.
 
-Dingo uses Markdown syntax for post editing:
+欢迎使用SimplePosts使用Markdown语法进行后期编辑：
 
-# Heading
+# 1号标题
 
-## Sub-heading
+## 2号标题
 
-### Another deeper heading
+### 其他标题
 
-Paragraphs are separated
-by a blank line.
+**加粗**, ` + "`" + `字符` + "`" + `.
 
-Two spaces at the end of a line leave a
-line break.
+图片测试:
 
-Text attributes _italic_,
-**bold**, ` + "`" + `monospace` + "`" + `.
+![Logo](http://ygjs-static-hz.oss-cn-beijing.aliyuncs.com/images/2018-03-22/TIM%E6%88%AA%E5%9B%BE20180322174243.png)
 
-Image:
-
-![Dingo Logo](https://cloud.githubusercontent.com/assets/1311594/14765969/bc14bafc-09c7-11e6-92f8-d69774cca249.png)
-
-Bullet list:
+无序列表:
 
   * apples
   * oranges
   * pears
 
-Numbered list:
+有序列表:
 
   1. apples
   2. oranges
   3. pears
 
 
-Quoting:
+引用:
 
 > Sportsman delighted improving dashwoods gay instantly happiness six. Ham now amounted absolute not mistaken way pleasant whatever. At an these still no dried folly stood thing. Rapid it on hours hills it seven years. If polite he active county in spirit an. Mrs ham intention promotion engrossed assurance defective. Confined so graceful building opinions whatever trifling in. Insisted out differed ham man endeavor expenses. At on he total their he songs. Related compact effects is on settled do.
 
-Code block:
+代码片段:
 
 ` + "```" + `go
 package main
@@ -140,11 +133,11 @@ func main() {
 }
 ` + "```" + `
 
-Link:
+超链接:
 
 An [example link](http://example.com).
 
-Table:
+表格:
 
 |        | Cost to x | Cost to y | Cost to z |
 |--------|-----------|-----------|-----------|
@@ -156,8 +149,8 @@ Table:
 func createWelcomeData() error {
 	var err error
 	p := NewPost()
-	p.Title = "Welcome to Dingo!"
-	p.Slug = "welcome-to-dingo"
+	p.Title = "Welcome to SimplePosts!"
+	p.Slug = "welcome-to-SimplePosts"
 	p.Markdown = samplePostContent
 	p.Html = utils.Markdown2Html(p.Markdown)
 	p.AllowComment = true
@@ -166,25 +159,11 @@ func createWelcomeData() error {
 	p.UpdatedBy = 0
 	p.IsPublished = true
 	p.IsPage = false
-	tags := GenerateTagsFromCommaString("Welcome, Dingo")
+	tags := GenerateTagsFromCommaString("Welcome, SimplePosts")
 	err = p.Save(tags...)
 	if err != nil {
 		return err
 	}
-
-	c := NewComment()
-	c.Author = "Shawn Ding"
-	c.Email = "dingpeixuan911@gmail.com"
-	c.Website = "http://github.com/luohao-brian/SimplePosts"
-	c.Content = "Welcome to Dingo! This is your first comment."
-	c.Avatar = utils.Gravatar(c.Email, "50")
-	c.PostId = p.Id
-	c.Parent = int64(0)
-	c.Ip = "127.0.0.1"
-	c.UserAgent = "Mozilla"
-	c.UserId = 0
-	c.Approved = true
-	c.Save()
 
 	return nil
 }

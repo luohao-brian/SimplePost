@@ -17,7 +17,6 @@ var (
 
 func init() {
 	messageGenerator = make(map[string]func(v interface{}) string)
-	messageGenerator["comment"] = generateCommentMessage
 	messageGenerator["backup"] = generateBackupMessage
 }
 
@@ -72,33 +71,6 @@ func (m *Messages) GetUnreadMessages() {
 		panic(err)
 	}
 	return
-}
-
-func generateCommentMessage(co interface{}) string {
-	c, ok := co.(*Comment)
-	if !ok {
-		return ""
-	}
-	post := &Post{Id: c.PostId}
-	err := post.GetPostById()
-	if err != nil {
-		panic(err)
-	}
-	var s string
-	if c.Parent < 1 {
-		s = "<p>" + c.Author + " commented on post <i>" + string(post.Title) + "</i>: </p><p>"
-		s += utils.Html2Str(c.Content) + "</p>"
-	} else {
-		pc := &Comment{Id: c.Parent}
-		err = pc.GetCommentById()
-		if err != nil {
-			s = "<p>" + c.Author + " commented on post <i>" + string(post.Title) + "</i>: </p><p>"
-		} else {
-			s = "<p>" + c.Author + " replied " + pc.Author + "'s comment on <i>" + string(post.Title) + "</i>: </p><p>"
-			s += utils.Html2Str(c.Content) + "</p>"
-		}
-	}
-	return s
 }
 
 func generateBackupMessage(co interface{}) string {

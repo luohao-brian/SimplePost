@@ -3,9 +3,9 @@ package handler
 import (
 	"strconv"
 
+	"github.com/dinever/golf"
 	"github.com/luohao-brian/SimplePosts/app/model"
 	"github.com/luohao-brian/SimplePosts/app/utils"
-	"github.com/dinever/golf"
 )
 
 func AdminHandler(ctx *golf.Context) {
@@ -18,7 +18,6 @@ func AdminHandler(ctx *golf.Context) {
 		"Statis":   model.NewStatis(ctx.App),
 		"User":     u,
 		"Messages": m,
-		"Monitor":  utils.ReadMemStats(),
 	})
 }
 
@@ -252,98 +251,6 @@ func PageSaveHandler(ctx *golf.Context) {
 	})
 }
 
-func CommentViewHandler(ctx *golf.Context) {
-	user, _ := ctx.Session.Get("user")
-	p := ctx.Request.FormValue("page")
-	var page int
-	if p == "" {
-		page = 1
-	} else {
-		page, _ = strconv.Atoi(p)
-	}
-	comments := new(model.Comments)
-	pager, err := comments.GetCommentList(int64(page), 10, false)
-	if err != nil {
-		panic(err)
-	}
-	ctx.Loader("admin").Render("comments.html", map[string]interface{}{
-		"Title":    "留言管理",
-		"Comments": comments,
-		"User":     user,
-		"Pager":    pager,
-	})
-}
-
-func CommentAddHandler(ctx *golf.Context) {
-	userObj, _ := ctx.Session.Get("user")
-	u := userObj.(*model.User)
-	pid, _ := strconv.Atoi(ctx.Request.FormValue("pid"))
-	parent := &model.Comment{Id: int64(pid)}
-	err := parent.GetCommentById()
-	if err != nil {
-		panic(err)
-	}
-	if !parent.Approved {
-		parent.Approved = true
-		parent.Save()
-	}
-	c := model.NewComment()
-	c.Author = u.Name
-	c.Email = u.Email
-	c.Website = u.Website
-	c.Content = ctx.Request.FormValue("content")
-	c.Avatar = utils.Gravatar(c.Email, "50")
-	c.Parent = parent.Id
-	c.PostId = parent.PostId
-	c.Ip = ctx.Request.RemoteAddr
-	c.UserAgent = ctx.Request.UserAgent()
-	c.UserId = u.Id
-	c.Approved = true
-	if err := c.Save(); err != nil {
-		panic(err)
-	}
-	ctx.JSON(map[string]interface{}{
-		"status":  "success",
-		"comment": c.ToJson(),
-	})
-	if err := model.NewMessage("comment", c).Insert(); err != nil {
-		panic(err)
-	}
-}
-
-func CommentUpdateHandler(ctx *golf.Context) {
-	id, _ := strconv.Atoi(ctx.Request.FormValue("id"))
-	c := &model.Comment{Id: int64(id)}
-	err := c.GetCommentById()
-	if err != nil {
-		ctx.JSON(map[string]interface{}{
-			"status": "error",
-			"msg":    err.Error(),
-		})
-	}
-	c.Approved = true
-	if err := c.Save(); err != nil {
-		panic(err)
-	}
-	ctx.JSON(map[string]interface{}{
-		"status": "success",
-	})
-}
-
-func CommentRemoveHandler(ctx *golf.Context) {
-	id, _ := strconv.Atoi(ctx.Request.FormValue("id"))
-	err := model.DeleteComment(int64(id))
-	if err != nil {
-		ctx.JSON(map[string]interface{}{
-			"status": "success",
-			"msg":    err.Error(),
-		})
-	}
-	ctx.JSON(map[string]interface{}{
-		"status": "success",
-	})
-}
-
 func SettingViewHandler(ctx *golf.Context) {
 	user, _ := ctx.Session.Get("user")
 	ctx.Loader("admin").Render("setting.html", map[string]interface{}{
@@ -446,14 +353,5 @@ func AdminPasswordChange(ctx *golf.Context) {
 	u.ChangePassword(newPassword)
 	ctx.JSON(map[string]interface{}{
 		"status": "success",
-	})
-}
-
-func AdminMonitorPage(ctx *golf.Context) {
-	user, _ := ctx.Session.Get("user")
-	ctx.Loader("admin").Render("monitor.html", map[string]interface{}{
-		"Title":   "网站监控",
-		"User":    user,
-		"Monitor": utils.ReadMemStats(),
 	})
 }

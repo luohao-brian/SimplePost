@@ -46,7 +46,7 @@ func createTableIfNotExist() error {
 }
 
 func checkBlogSettings() {
-	SetSettingIfNotExists("theme", "hux-theme", "blog")
+	SetSettingIfNotExists("theme", "default", "blog")
 	SetSettingIfNotExists("title", "My Blog", "blog")
-	SetSettingIfNotExists("description", "Awesome blog created by Dingo.", "blog")
+	SetSettingIfNotExists("description", "Awesome blog created by SimplePosts.", "SimplePosts")
 }

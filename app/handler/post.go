@@ -21,9 +21,6 @@ func registerPostHandlers(app *golf.Application, routes map[string]map[string]in
 	app.Get("/api/posts/slug/:slug", APIPostSlugHandler)
 	routes["GET"]["post_slug_url"] = "/api/posts/slug/:slug"
 
-	app.Get("/api/posts/:post_id/comments", APIPostCommentsHandler)
-	routes["GET"]["post_comments_url"] = "/api/posts/:post_id/comments"
-
 	app.Get("/api/posts/:post_id/author", APIPostAuthorHandler)
 	routes["GET"]["post_author_url"] = "/api/posts/:post_id/author"
 
@@ -137,16 +134,6 @@ func APIPostsHandler(offset, limit int) golf.HandlerFunc {
 		}
 		ctx.JSON(NewAPISuccessResponse(posts))
 	}
-}
-
-// APIPostCommentsHandler gets the comments on the given post.
-func APIPostCommentsHandler(ctx *golf.Context) {
-	post := getPostFromContext(ctx)
-	if post == nil {
-		return
-	}
-	comments := post.Comments()
-	ctx.JSON(NewAPISuccessResponse(comments))
 }
 
 // APIPostAuthorHandler gets the author of the given post.

@@ -5,48 +5,48 @@
   <h1>用户详情</h1>
 </section>
 <section class="content">
-  <div class="col-md-8 box-info box">
+  <div class="col-md-8 box-info box" style="height: auto;overflow: hidden;">
     <div style="margin-top:3em;">
     <img src="{{.User.Avatar}}" class="profile-user-img img-responsive img-circle" alt="{{.User.Name}}">
-    <p style="margin:0 auto;width:20%;">Your profile avatar (Generated from <a href="https://en.gravatar.com/">Gravatar</a>)</p>
-    <div class="col-md-8" style="left:25%;margin:0 0 0 -135px;">
-      <form id="profile" action="" method="post" class="form-horizontal" style="margin-bottom: 5em;">
+    <p style="margin:0 auto;width:100%;text-align: center;">头像申请地址(<a href="https://en.gravatar.com/">Gravatar</a>)</p>
+    <div class="col-md-8" style="margin:0 auto;width:100%;">
+      <form id="profile" action="" method="post" class="form-horizontal">
         <div class="box-body">
           <div class="form-group">
-            <label class="col-sm-1 control-label">Name</label>
+            <label class="col-sm-2 control-label">用 户 名</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" name="name" placeholder="Name" value="{{.User.Name}}">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-1 control-label">Slug</label>
+            <label class="col-sm-2 control-label">标 识 名</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" name="slug" placeholder="Slug" value="{{.User.Slug}}">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-1 control-label">Email</label>
+            <label class="col-sm-2 control-label">邮箱地址</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" name="email" placeholder="Email" value="{{.User.Email}}">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-1 control-label">Website</label>
+            <label class="col-sm-2 control-label">网站主页</label>
             <div class="col-sm-10">
               <input type="text" class="form-control" name="url" placeholder="/" value="{{.User.Website}}">
             </div>
           </div>
 
           <div class="form-group">
-            <label class="col-sm-1 control-label">Bio</label>
+            <label class="col-sm-2 control-label">个人介绍</label>
             <div class="col-sm-10">
               <textarea class="form-control" name="bio" rows="3" placeholder="Enter ...">{{.User.Bio}}</textarea>
             </div>
           </div>
         </div>
-        <div style="text-align: center;">
-          <button type="button" id="save_profile" class="btn btn-block btn-primary btn-flat" style="width: 25%;margin:0 auto;">Save Profile</button>
-          <a href="/admin/password/" type="reset" class="text-green">Change password</a>
+        <div style="text-align: center;margin-bottom: 2em;">
+          <button type="button" id="save_profile" class="btn btn-block btn-primary btn-flat" style="width: 25%;margin:0 auto;">保存</button>
+          <a href="/admin/password/" type="reset" class="text-green">修改密码</a>
         </div>
       </form>
     </div>

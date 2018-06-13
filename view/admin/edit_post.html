@@ -14,22 +14,14 @@
 				<input type="text" class="form-control" name="title" value="{{ .Post.Title }}">
 			</div>
 			<div class="form-group">
-				<label>文章别名</label>
+				<label>标识</label>
 				<input type="text" class="form-control" name="slug" value="{{ .Post.Slug }}">
-			</div>
-			<div class="form-group">
-				<label>背景图片</label>
-				<input type="text" class="form-control" name="image" value="{{ .Post.Image }}">
 			</div>
 			<div id="editormd" >
 				<textarea name="content" id="content" class="ipt">{{Html .Post.Markdown}}</textarea>
 			</div>
 			<div class="form-group">
 				<div class="col-xs-4">
-					<label>分类</label>
-					<input type="text" class="form-control" name="category" value="{{ .Post.Title }}">
-				</div>
-				<div class="col-xs-4" style="margin-left:10%;">
 					<label for="slug">标签 (","隔开)</label>
 					<input type="text" class="form-control" name="tag" id="tag" value="{{ .Post.TagString }}">
 				</div>

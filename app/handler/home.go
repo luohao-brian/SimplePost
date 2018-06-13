@@ -1,8 +1,6 @@
 package handler
 
 import (
-	"html/template"
-	"log"
 	"net/url"
 	"strconv"
 	"strings"
@@ -16,7 +14,6 @@ import (
 func RegisterFunctions(app *golf.Application) {
 	app.View.FuncMap["Tags"] = getAllTags
 	app.View.FuncMap["RecentPosts"] = getRecentPosts
-	app.View.FuncMap["RecentComments"] = getRecentComments
 }
 
 func HomeHandler(ctx *golf.Context) {
@@ -54,10 +51,9 @@ func ContentHandler(ctx *golf.Context) {
 	}
 	post.Hits++
 	data := map[string]interface{}{
-		"Title":    post.Title,
-		"Post":     post,
-		"Content":  post,
-		"Comments": post.Comments,
+		"Title":   post.Title,
+		"Post":    post,
+		"Content": post,
 	}
 	if post.IsPage {
 		ctx.Loader("theme").Render("page.html", data)
@@ -83,86 +79,6 @@ func TagsHandler(ctx *golf.Context) {
 		"Posts": posts,
 	}
 	ctx.Loader("theme").Render("tags.html", data)
-}
-
-func CommentHandler(ctx *golf.Context) {
-	id := ctx.Param("id")
-	cid, _ := strconv.Atoi(id)
-	post := new(model.Post)
-	post.Id = int64(cid)
-	err := post.GetPostById()
-	if cid < 1 || err != nil {
-		ctx.JSON(map[string]interface{}{
-			"status": "error",
-		})
-	}
-	c := model.NewComment()
-	c.Author = ctx.Request.FormValue("author")
-	c.Email = ctx.Request.FormValue("email")
-	c.Website = ctx.Request.FormValue("website")
-	c.Content = strings.Replace(utils.Html2Str(template.HTMLEscapeString(ctx.Request.FormValue("comment"))), "\n", "<br/>", -1)
-	c.Avatar = utils.Gravatar(c.Email, "50")
-	c.PostId = post.Id
-	pid, _ := strconv.Atoi(ctx.Request.FormValue("pid"))
-	c.Parent = int64(pid)
-	c.Ip = ctx.Request.RemoteAddr
-	c.UserAgent = ctx.Request.UserAgent()
-	c.UserId = 0
-	msg := c.ValidateComment()
-	if msg == "" {
-		if err := c.Save(); err != nil {
-			ctx.JSON(map[string]interface{}{
-				"status": "error",
-				"msg":    "Can not comment on this post.",
-			})
-		}
-		post.CommentNum++
-		err = post.Save()
-		if err != nil {
-			log.Printf("[Error]: Can not increase comment count for post %v: %v", post.Id, err.Error())
-		}
-		ctx.JSON(map[string]interface{}{
-			"res":     true,
-			"comment": c.ToJson(),
-		})
-		if err = model.NewMessage("comment", c).Insert(); err != nil {
-			panic(err)
-		}
-	} else {
-		ctx.JSON(map[string]interface{}{
-			"status": "error",
-			"msg":    msg,
-		})
-	}
-}
-
-func TagHandler(ctx *golf.Context) {
-	p := ctx.Param("page")
-
-	var page int
-	if p == "" {
-		page = 1
-	} else {
-		page, _ = strconv.Atoi(p)
-	}
-
-	t := ctx.Param("tag")
-	tagSlug, _ := url.QueryUnescape(t)
-	tag := &model.Tag{Slug: tagSlug}
-	err := tag.GetTagBySlug()
-	if err != nil {
-		NotFoundHandler(ctx)
-		return
-	}
-	posts := new(model.Posts)
-	pager, err := posts.GetPostsByTag(tag.Id, int64(page), 5, true)
-	data := map[string]interface{}{
-		"Posts": posts,
-		"Pager": pager,
-		"Tag":   tag,
-		"Title": tag.Name,
-	}
-	ctx.Loader("theme").Render("tag.html", data)
 }
 
 func SiteMapHandler(ctx *golf.Context) {
@@ -203,6 +119,35 @@ func SiteMapHandler(ctx *golf.Context) {
 		"Posts":      articleMap,
 		"Navigators": navMap,
 	})
+}
+
+func TagHandler(ctx *golf.Context) {
+	p := ctx.Param("page")
+
+	var page int
+	if p == "" {
+		page = 1
+	} else {
+		page, _ = strconv.Atoi(p)
+	}
+
+	t := ctx.Param("tag")
+	tagSlug, _ := url.QueryUnescape(t)
+	tag := &model.Tag{Slug: tagSlug}
+	err := tag.GetTagBySlug()
+	if err != nil {
+		NotFoundHandler(ctx)
+		return
+	}
+	posts := new(model.Posts)
+	pager, err := posts.GetPostsByTag(tag.Id, int64(page), 5, true)
+	data := map[string]interface{}{
+		"Posts": posts,
+		"Pager": pager,
+		"Tag":   tag,
+		"Title": tag.Name,
+	}
+	ctx.Loader("theme").Render("tag.html", data)
 }
 
 func RssHandler(ctx *golf.Context) {
