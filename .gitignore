@@ -1,8 +1,7 @@
 # dingo stuff
-dingo
-dingo.db
-dingo.rsa
-dingo.rsa.pub
+SimplePosts
+SimplePosts.rsa
+SimplePosts.rsa.pub
 
 .DS_Store
 .AppleDouble
@@ -29,11 +28,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-# Database and key file
-db.lock
-dingo.rsa
-dingo.rsa.pub
 
 # Ignore upload directory
 upload/*
