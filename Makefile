@@ -13,7 +13,7 @@ check:
 	find . -name "*.go" | xargs gofmt -s -l
 
 .PHONY: build
-build: GOFLAGS += -i -o dingo
+build: GOFLAGS += -i -o SimplePosts
 build:
 	$(GO) build -v $(GOFLAGS) main.go
 
