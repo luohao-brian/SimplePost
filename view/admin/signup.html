@@ -1,77 +1,71 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
-    <title>Sign Up - Dingo </title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-          rel="stylesheet">
-    <link href="/admin/static/css/vendor.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="/admin/static/css/app.css" type="text/css" rel="stylesheet" media="screen,projection">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Dingo Bolg - 注册</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="/admin/bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/admin/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="/admin/bower_components/Ionicons/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/admin/static/css/AdminLTE.min.css">
+  <link rel="stylesheet" href="/admin/static/css/apps.css">
+  <link rel="stylesheet" href="/admin/static/css/skins/skin-blue.min.css">
+</head>
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">
+    <a href="/admin/"><b>Dingo</b></a>
+  </div>
 
-  <body class="blue login-body">
-    <div class="mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
-      <div class="dingo-login-ribbon mdl-color--primary"></div>
-      <main class="dingo-signup-main mdl-layout__content">
-      <a id="top"></a>
-      <div class="mdl-grid">
-        <div class="mdl-cell mdl-cell--4-col mdl-cell--hide-tablet mdl-cell--hide-phone"></div>
-        <div class="mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--4-col mdl-cell--12-col-tablet">
+  <div class="register-box-body">
+    <p class="login-box-msg">注册用户</p>
 
-          <div class="mdl-card__title ">
-            <h2 class="mdl-card__title-text">
-              <i class="material-icons mdl-color-text--grey m-r-5 lh-13">account_circle</i>
-              Sign Up
-            </h2>
-          </div>
-          <div class="p-l-20 p-r-20 p-b-20">
-            <form id="signup-form" action="/signup" method="POST">
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label fullwidth">
-                <input class="mdl-textfield__input" type="text" id="name" name="name">
-                <label class="mdl-textfield__label" for="name">Name</label>
-              </div>
-
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label fullwidth">
-                <input class="mdl-textfield__input" type="text" id="email" name="email">
-                <label class="mdl-textfield__label" for="email">Email</label>
-              </div>
-
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label fullwidth">
-                <input class="mdl-textfield__input" type="password" id="password" name="password">
-                <label class="mdl-textfield__label" for="password">Password</label>
-              </div>
-
-              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label fullwidth">
-                <input class="mdl-textfield__input" type="password" id="re-password" name="re-password">
-                <label class="mdl-textfield__label" for="re-password">Confirm password</label>
-              </div>
-
-              <div class="m-t-20">
-                <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-js-ripple-effect mdl-color--light-blue">
-                  Sign Up
-                </button>
-                <a href="/login" class="mdl-button mdl-js-button mdl-js-ripple-effect">
-                  Login
-                </a>
-              </div>
-
-            </form>
-          </div>
-
-
-        </div>
+    <form action="/signup" method="post" id="signup-form">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" id="name" placeholder="用户名" name="name">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
-      </main>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
-    <script src="/admin/static/js/vendor.js"></script>
-    <script src="/admin/static/js/app.js"></script>
-    <script>
-
-    </script>
-
-  </body>
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" placeholder="邮箱" name="email" id="email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="密码" id="password" name="password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" placeholder="确认密码" id="re-password" name="re-password">
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-4 pull-left">
+			<a href="/login/" class="text-center"><button type="button" class="btn btn-primary btn-block btn-flat">登录</button></a>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4 pull-right">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">注册</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+    
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->
+	<script src="/admin/bower_components/jquery/dist/jquery.min.js"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="/admin/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- AdminLTE App -->
+	<script src="/admin/static/js/jquery.form.min.js"></script>
+	<script src="/admin/static/js/validate.min.js"></script>
+	<script src="/admin/static/js/alertify.min.js"></script>
+	<script src="/admin/static/js/adminlte.min.js"></script>
+	<script src="/admin/static/js/apps.js"></script>
+</body>
 </html>

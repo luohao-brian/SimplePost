@@ -2,7 +2,7 @@
 
 .CodeMirror {
     /* Set height, width, borders, and global font properties here */
-    font-family: Consolas, "Microsoft YaHei", "Courier New", Arial;
+    font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
     height: 660px;
     font-size: 13px;
     border:1px solid #999;
@@ -664,7 +664,7 @@ code[class*="language-"],
 pre[class*="language-"] {
 	color: black;
 	background: none;
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-family: Helvetica,Arial,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",STHeiti,"华文细黑",sans-serif;
 	direction: ltr;
 	text-align: left;
 	white-space: pre;
